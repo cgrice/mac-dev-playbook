@@ -1,0 +1,13 @@
+---
+- name: Make python3 default
+  file:
+    src: "/usr/local/bin/python3"
+    dest: "/usr/local/bin/python"
+    state: link
+
+- name: Make pip3 default
+  file:
+    src: "/usr/local/bin/pip3"
+    dest: "/usr/local/bin/pip"
+    state: link
+    force: yes

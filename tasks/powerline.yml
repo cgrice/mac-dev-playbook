@@ -1,0 +1,31 @@
+---
+  - 
+  - name: "mk /tmp/.fonts dir"
+    file: dest=/tmp/.fonts state=directory
+
+  - name: clone powerline-fonts
+    git: repo=https://github.com/powerline/fonts.git
+          dest=/tmp/.fonts/powerline
+
+  - name: preparing to install powerline-fonts
+    debug: msg="preparing to install"
+
+  - name: download firacode
+    get_url:
+      url: https://github.com/tonsky/FiraCode/releases/download/0.6/FiraCode-Regular.otf
+      dest: ~/Library/Fonts/FiraCode.otf
+      mode: 0440
+
+  - name: install powerline-fonts
+    script: "/tmp/.fonts/powerline/install.sh"
+    register: result
+
+  - name: start iterm
+    shell: open /Applications/iTerm.app
+
+  - name: copy iterm profile
+    copy:
+      dest: ~/Library/Application Support/iTerm2/DynamicProfiles/default.json
+      src: files/terminal/iterm2.profile.json
+
+  

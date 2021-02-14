@@ -23,6 +23,7 @@
     version: "{{ item.version | default(omit) }}"
     executable: "{{ item.executable | default(omit) }}"
   with_items: "{{ pip_packages }}"
+  sudo: yes
 
 - name: Install global Ruby gems.
   gem:
